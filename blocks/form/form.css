@@ -1,5 +1,6 @@
-.elements__card {
+.form {
   background-color: #fff;
-  width: 100%;
+  width: 430px;
+  height: 430px;
   border-radius: 10px;
 }
