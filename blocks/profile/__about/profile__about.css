@@ -5,7 +5,13 @@
   align-self: center;
 }
 
-@media screen and (max-width: 568px) {
+@media screen and (max-width: 768px) {
+  .profile__about {
+    margin: 10px 0 20px;
+  }
+}
+
+@media screen and (max-width: 400px) {
   .profile__about {
     font-size: 14px;
     line-height: 17px;

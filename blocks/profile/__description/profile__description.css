@@ -4,10 +4,15 @@
   max-width: 336px;
 }
 
-@media screen and (max-width: 568px) {
+@media screen and (max-width: 768px) {
   .profile__description {
-    max-width: 282px;
     justify-content: center;
     align-items: center;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile__description {
+    max-width: 282px;
   }
 }

@@ -18,7 +18,6 @@
 
 @media screen and (max-width: 600px) {
   .elements__list {
-    /*grid-template-columns: repeat(1, 282px);*/
     grid-template-columns: repeat(1,minmax(282px, 485px));
   }
 }
