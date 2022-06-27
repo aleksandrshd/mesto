@@ -4,5 +4,12 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-image: url(../../../images/avatar.jpg);
-  border-radius: 60px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+@media screen and (max-width: 568px) {
+  .profile__avatar {
+    margin: 0 auto 26px;
+  }
 }

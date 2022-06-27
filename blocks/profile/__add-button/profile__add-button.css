@@ -5,6 +5,16 @@
   background-repeat: no-repeat;
   background-image: url(../../../images/add-button.svg);
   border: 1px solid #fff;
-  background-color: #000;
+  background-color: transparent;
   background-position: center center;
+  margin-left: auto;
+  align-self: center;
+}
+
+@media screen and (max-width: 568px) {
+  .profile__add-button {
+    width: 282px;
+    background-size: 16px 16px;
+    margin: 0;
+  }
 }
