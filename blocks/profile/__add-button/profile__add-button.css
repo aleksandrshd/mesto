@@ -9,6 +9,8 @@
   background-position: center center;
   margin-left: auto;
   align-self: center;
+  transition: opacity .4s linear;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
@@ -22,4 +24,8 @@
   .profile__add-button {
     background-size: 16px 16px;
   }
+}
+
+.profile__add-button:hover {
+  opacity: .6;
 }

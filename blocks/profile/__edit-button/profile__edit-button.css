@@ -8,6 +8,8 @@
   background-color: transparent;
   align-self: center;
   margin-left: 18px;
+  transition: opacity .4s linear;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 568px) {
@@ -16,4 +18,8 @@
     height: 18px;
     margin-left: 10px;
   }
+}
+
+.profile__edit-button:hover {
+  opacity: .6;
 }
