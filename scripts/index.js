@@ -3,7 +3,6 @@ let editButton = document.querySelector('.profile__edit-button');
 let popupElement = document.querySelector('.popup');
 let formElement = popupElement.querySelector('.popup__form');
 let closeButton = formElement.querySelector('.popup__close-button');
-let saveButton = formElement.querySelector('.popup__save-button');
 let nameInput = formElement.querySelector('.popup__input-name');
 let jobInput = formElement.querySelector('.popup__input-about');
 
@@ -33,4 +32,4 @@ function formSubmitHandler (evt) {
   popupElement.classList.remove('popup_display_open');
 }
 
-saveButton.addEventListener('click', formSubmitHandler);
+formElement.addEventListener('submit', formSubmitHandler);

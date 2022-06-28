@@ -5,7 +5,7 @@
   max-width: 400px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 810px) {
   .profile__description {
     justify-content: center;
     align-items: center;

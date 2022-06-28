@@ -5,6 +5,7 @@
   background-repeat: no-repeat;
   background-image: url(../../../images/close-button.svg);
   background-color: transparent;
+  border: none;
   position: absolute;
   right: -40px;
   top: -40px;
