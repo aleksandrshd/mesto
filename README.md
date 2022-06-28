@@ -27,11 +27,11 @@
 
 ## Макет Проектной работы в Figma:
 
-https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4;
+https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1;
 
 ## Чеклист Проектной работы:
 
-https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-4/index.html;
+https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-4.pdf;
 
 ## Ссылка на сайт:
 
