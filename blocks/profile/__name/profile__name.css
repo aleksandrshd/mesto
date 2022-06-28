@@ -4,6 +4,16 @@
   line-height: 48px;
   margin: 0;
   align-self: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 350px;
+}
+
+@media screen and (max-width: 830px) {
+  .profile__name {
+    max-width: 60%;
+  }
 }
 
 @media screen and (max-width: 400px) {
