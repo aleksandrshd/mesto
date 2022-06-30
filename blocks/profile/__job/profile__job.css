@@ -1,7 +1,7 @@
 .profile__job {
   font-size: 18px;
   line-height: 22px;
-  margin: 0 0 5px;
+  margin: 7px 0 0;
   align-self: center;
   text-overflow: ellipsis;
   white-space: nowrap;

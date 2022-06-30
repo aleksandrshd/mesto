@@ -9,9 +9,3 @@
     width: 88.125%;
   }
 }
-
-@media screen and (max-width: 568px) {
-  .elements {
-    width: 88.125%;
-  }
-}
