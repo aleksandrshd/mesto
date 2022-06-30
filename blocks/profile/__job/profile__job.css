@@ -1,20 +1,19 @@
 .profile__job {
   font-size: 18px;
   line-height: 22px;
-  margin: 7px 0 0;
-  align-self: center;
+  max-width: 450px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 350px;
-  min-width: 205px;
-  text-align: center;
+  margin: 0;
+  grid-area: job;
 }
 
 @media screen and (max-width: 810px) {
   .profile__job {
-    margin: 10px 0 20px;
-    max-width: 60%;
+    max-width: 300px;
+    text-align: center;
+    align-self: center;
   }
 }
 
@@ -22,6 +21,5 @@
   .profile__job {
     font-size: 14px;
     line-height: 17px;
-    margin: 7px 0 33px;
   }
 }

@@ -3,13 +3,11 @@
   font-size: 42px;
   line-height: 48px;
   margin: 0;
-  align-self: center;
+  max-width: 450px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 350px;
-  min-width: 180px;
-  text-align: center;
+  grid-area: name;
 }
 
 @media screen and (max-width: 830px) {
