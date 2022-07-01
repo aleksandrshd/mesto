@@ -10,17 +10,39 @@
   grid-area: name;
 }
 
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 924px) {
   .profile__name {
-    max-width: 295px;
+    max-width: 350px;
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 860px) {
+  .profile__name {
+    font-size: 36px;
+    line-height: 1.15;
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .profile__name {
+    font-size: 30px;
+    line-height: 1.15;
+    max-width: 270px;
+  }
+}
+
+@media screen and (max-width: 680px) {
   .profile__name {
     font-size: 27px;
     line-height: 33px;
-    margin-left: 25px;
-    max-width: 190px;
+    max-width: 230px;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .profile__name {
+   max-width: 190px;
+  }
+}
+

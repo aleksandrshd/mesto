@@ -9,17 +9,35 @@
   grid-area: job;
 }
 
-@media screen and (max-width: 810px) {
+@media screen and (max-width: 924px) {
   .profile__job {
-    max-width: 300px;
-    text-align: center;
-    align-self: center;
+    max-width: 350px;
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 860px) {
+  .profile__job {
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .profile__job {
+    max-width: 270px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .profile__job {
+    max-width: 230px;
+  }
+}
+
+@media screen and (max-width: 600px) {
   .profile__job {
     font-size: 14px;
     line-height: 17px;
+    margin-left: 18px;
+    max-width: 190px;
   }
 }

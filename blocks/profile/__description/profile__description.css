@@ -10,11 +10,10 @@
 
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 600px) {
   .profile__description {
-    max-width: 282px;
     column-gap: 10px;
     row-gap: 7px;
-    padding-bottom: 33px;
+    padding: 0 0 33px 25px;
   }
 }
