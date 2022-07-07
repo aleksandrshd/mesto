@@ -52,7 +52,7 @@
 
   </footer>
 
-  <div class="popup">
+  <div class="popup popup-profile">
 
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>
@@ -66,10 +66,35 @@
 
   </div>
 
+  <div class="popup popup-card">
+
+    <div class="popup__container popup__container-card">
+      <button class="popup__close-button popup__close-button-card" type="button"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form" name="input_type_titleLink">
+        <input class="popup__input popup__input_type_title" type="text" name="title" value="" placeholder="Название">
+        <input class="popup__input popup__input_type_link" type="url" name="link" value="" placeholder="Ссылка на картинку">
+        <button class="popup__save-button" type="submit">Создать</button>
+      </form>
+    </div>
+
+</div>
+
+<div class="popup popup-image">
+
+  <div class="popup__container-image">
+    <button class="popup__close-button popup__close-button-image" type="button"></button>
+    <img class="popup__img" src="" alt="">
+    <h2 class="popup__caption"></h2>
+  </div>
+
+</div>
+
   <template class="element-template">
 
     <li class="elements__card">
-      <img class="elements__image" src="" alt="">
+      <button class="elements__delete-button" type="button"></button>
+      <img class="elements__image" src="" alt="" <!--onclick="popupOpenImage()"-->>
       <div class="elements__container">
         <h2 class="elements__title"></h2>
         <button class="elements__like-button" type="button"></button>
