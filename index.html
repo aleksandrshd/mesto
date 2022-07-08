@@ -6,7 +6,8 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="keywords" content="картинки, изображения, фото, фотографии, снимки, места России, достопримечательности России">
+  <meta name="keywords"
+    content="картинки, изображения, фото, фотографии, снимки, места России, достопримечательности России">
   <meta name="description" content="Картинки мест и достопримечательностей России">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="pages/index.css">
@@ -24,25 +25,25 @@
 
   <main class="content">
 
-  <section class="profile">
+    <section class="profile">
 
-    <div class="profile__avatar"></div>
+      <div class="profile__avatar"></div>
       <div class="profile__description">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
         <button class="profile__edit-button" type="button"></button>
         <p class="profile__job">Исследователь океана</p>
       </div>
-    <button class="profile__add-button" type="button"></button>
+      <button class="profile__add-button" type="button"></button>
 
-  </section>
+    </section>
 
-  <section class="elements">
+    <section class="elements">
 
-    <ul class="elements__list">
+      <ul class="elements__list">
 
-    </ul>
+      </ul>
 
-  </section>
+    </section>
 
   </main>
 
@@ -54,16 +55,15 @@
 
   <div class="popup popup-profile">
 
-      <div class="popup__container">
-        <button class="popup__close-button" type="button"></button>
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="input_type_nameJob">
-          <input class="popup__input popup__input_type_name" type="text" name="name" value="">
-          <input class="popup__input popup__input_type_job" type="text" name="job" value="">
-          <button class="popup__save-button" type="submit">Сохранить</button>
-        </form>
-      </div>
-
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form" name="input_type_nameJob">
+        <input class="popup__input popup__input_type_name" type="text" name="name" value="">
+        <input class="popup__input popup__input_type_job" type="text" name="job" value="">
+        <button class="popup__save-button" type="submit">Сохранить</button>
+      </form>
+    </div>
   </div>
 
   <div class="popup popup-card">
@@ -73,22 +73,23 @@
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form" name="input_type_titleLink">
         <input class="popup__input popup__input_type_title" type="text" name="title" value="" placeholder="Название">
-        <input class="popup__input popup__input_type_link" type="url" name="link" value="" placeholder="Ссылка на картинку">
+        <input class="popup__input popup__input_type_link" type="url" name="link" value=""
+          placeholder="Ссылка на картинку">
         <button class="popup__save-button" type="submit">Создать</button>
       </form>
     </div>
 
-</div>
-
-<div class="popup popup-image">
-
-  <div class="popup__container popup__container-image">
-    <button class="popup__close-button popup__close-button-image" type="button"></button>
-    <img class="popup__img" src="" alt="">
-    <h2 class="popup__caption"></h2>
   </div>
 
-</div>
+  <div class="popup popup-image">
+
+    <div class="popup__container popup__container-image">
+      <button class="popup__close-button popup__close-button-image" type="button"></button>
+      <img class="popup__img" src="" alt="">
+      <h2 class="popup__caption"></h2>
+    </div>
+
+  </div>
 
   <template class="element-template">
 

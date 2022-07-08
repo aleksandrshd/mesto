@@ -6,21 +6,16 @@ const formElement = popupElementProfile.querySelector(".popup__container");
 const closeButton = formElement.querySelector(".popup__close-button");
 const nameInput = formElement.querySelector(".popup__input_type_name");
 const jobInput = formElement.querySelector(".popup__input_type_job");
-
 const popupElementCard = document.querySelector(".popup-card");
-const formElementCard = popupElementCard.querySelector(
-  ".popup__container-card"
-);
-const closeButtonCard = formElementCard.querySelector(
-  ".popup__close-button-card"
-);
+const formElementCard = popupElementCard.querySelector(".popup__container-card");
+const closeButtonCard = formElementCard.querySelector(".popup__close-button-card");
 const titleInput = formElementCard.querySelector(".popup__input_type_title");
 const linkInput = formElementCard.querySelector(".popup__input_type_link");
-
 const elementsList = document.querySelector(".elements__list");
 const elementTemplate = document.querySelector(".element-template").content;
-
 const addButton = document.querySelector(".profile__add-button");
+const popupElementImage = document.querySelector(".popup-image");
+const closeButtonImage = document.querySelector(".popup__close-button-image");
 
 const initialCards = [
   {
@@ -51,16 +46,17 @@ const initialCards = [
 
 initialCards.forEach(function (element) {
   const Element = elementTemplate.cloneNode(true);
+  const likeButton = Element.querySelector(".elements__like-button");
+  const deleteButton = Element.querySelector(".elements__delete-button");
+
   Element.querySelector(".elements__image").src = element.link;
   Element.querySelector(".elements__image").alt = element.name;
   Element.querySelector(".elements__title").textContent = element.name;
 
-  const likeButton = Element.querySelector(".elements__like-button");
   likeButton.addEventListener("click", function (evt) {
     evt.target.classList.toggle("elements__like-button_type_active");
   });
 
-  const deleteButton = Element.querySelector(".elements__delete-button");
   deleteButton.addEventListener("click", function (evt) {evt.target.closest("li").remove();});
 
   Element.querySelector(".elements__image").onclick = function() {
@@ -86,19 +82,15 @@ function popupOpenCard() {
   linkInput.value = "";
 }
 
-function popupClose() {
-  popupElementProfile.classList.remove("popup_opened");
-}
-
-function popupCloseCard() {
-  popupElementCard.classList.remove("popup_opened");
+function popupClose(popup) {
+  popup.classList.remove("popup_opened");
 }
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  popupClose();
+  popupClose(popupElementProfile);
 }
 
 function formSubmitHandlerCard(evt) {
@@ -116,25 +108,31 @@ function formSubmitHandlerCard(evt) {
   const deleteButton = Element.querySelector(".elements__delete-button");
   deleteButton.addEventListener("click", function (evt) {evt.target.closest("li").remove();});
 
+  Element.querySelector(".elements__image").onclick = function() {
+    popupElementImage.classList.add("popup_opened");
+    document.querySelector(".popup__img").src = this.src;
+    document.querySelector(".popup__img").alt = this.alt;
+    document.querySelector(".popup__caption").textContent = this.alt;
+  }
+
   elementsList.prepend(Element);
-  popupCloseCard();
+
+  popupClose(popupElementCard);
 }
 
-closeButton.addEventListener("click", popupClose);
-
 editButton.addEventListener("click", popupOpen);
+
+addButton.addEventListener("click", popupOpenCard);
 
 formElement.addEventListener("submit", formSubmitHandler);
 
 formElementCard.addEventListener("submit", formSubmitHandlerCard);
 
-addButton.addEventListener("click", popupOpenCard);
+closeButton.addEventListener("click", function () {popupClose(popupElementProfile)});
 
-closeButtonCard.addEventListener("click", popupCloseCard);
+closeButtonCard.addEventListener("click", function () {popupClose(popupElementCard)});
 
-const popupElementImage = document.querySelector(".popup-image");
-const ElementImage = document.querySelector(".elements__image");
-const popupElementCaption = popupElementImage.querySelector(".popup__title");
+closeButtonImage.addEventListener("click", function () {popupClose(popupElementImage)});
 
 
 
