@@ -13,9 +13,9 @@ const elementsList = document.querySelector(".elements__list");
 const elementTemplate = document.querySelector(".element-template").content;
 const addButton = document.querySelector(".profile__add-button");
 const imagePopup = document.querySelector(".popup-image");
-const imagePicture= document.querySelector(".popup__img");
+const imagePicture = document.querySelector(".popup__img");
 const imageCaption = document.querySelector(".popup__caption");
-const closeButtons = document.querySelectorAll('.popup__close-button');
+const closeButtons = document.querySelectorAll(".popup__close-button");
 
 const initialCards = [
   {
@@ -44,30 +44,33 @@ const initialCards = [
   },
 ];
 
-function createCard(element) {
+function createCard(item) {
+  const element = elementTemplate.cloneNode(true);
+  const imageElement = element.querySelector(".elements__image");
+  const likeButton = element.querySelector(".elements__like-button");
+  const titleElement = element.querySelector(".elements__title");
+  const deleteButton = element.querySelector(".elements__delete-button");
 
-  const Element = elementTemplate.cloneNode(true);
-  const imageElement = Element.querySelector(".elements__image");
-  const likeButton = Element.querySelector(".elements__like-button");
-  const titleElement = Element.querySelector(".elements__title");
-  const deleteButton = Element.querySelector(".elements__delete-button");
+  imageElement.src = item.link;
+  imageElement.alt = item.name;
+  titleElement.textContent = item.name;
 
-  imageElement.src = element.link;
-  imageElement.alt = element.name;
-  titleElement.textContent = element.name;
+  likeButton.addEventListener("click", (evt) => {
+    evt.target.classList.toggle("elements__like-button_type_active");
+  });
 
-  likeButton.addEventListener("click", (evt) => {evt.target.classList.toggle("elements__like-button_type_active");});
+  deleteButton.addEventListener("click", (evt) => {
+    evt.target.closest(".elements__card").remove();
+  });
 
-  deleteButton.addEventListener("click", (evt) => {evt.target.closest(".elements__card").remove();});
-
-  imageElement.onclick = function() {
+  imageElement.onclick = function () {
     openPopup(imagePopup);
-    imagePicture.src = element.link;
-    imagePicture.alt = element.name;
-    imageCaption.textContent = element.name;
-  }
+    imagePicture.src = item.link;
+    imagePicture.alt = item.name;
+    imageCaption.textContent = item.name;
+  };
 
-  return Element;
+  return element;
 }
 
 function openPopup(popup) {
@@ -90,12 +93,17 @@ function handleProfileFormSubmit(evt) {
 function handleCardFormSubmit(evt) {
   evt.preventDefault();
 
-  const newCards = [{
-    name: titleInput.value,
-    link: linkInput.value,
-  }];
+  const newCards = [
+    {
+      name: titleInput.value,
+      link: linkInput.value,
+    },
+  ];
 
-  newCards.forEach((element) => {const card = createCard(element); elementsList.prepend(card);});
+  newCards.forEach((item) => {
+    const card = createCard(item);
+    elementsList.prepend(card);
+  });
 
   titleInput.value = "";
   linkInput.value = "";
@@ -103,14 +111,26 @@ function handleCardFormSubmit(evt) {
   closePopup(cardPopup);
 }
 
-initialCards.forEach((element) => {const card = createCard(element); elementsList.append(card);});
+initialCards.forEach((item) => {
+  const card = createCard(item);
+  elementsList.append(card);
+});
 
-editButton.addEventListener("click", () => {openPopup(profilePopup);});
+editButton.addEventListener("click", () => {
+  openPopup(profilePopup);
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+});
 
-addButton.addEventListener("click", () => {openPopup(cardPopup);});
+addButton.addEventListener("click", () => {
+  openPopup(cardPopup);
+});
 
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
 cardForm.addEventListener("submit", handleCardFormSubmit);
 
-closeButtons.forEach((button) => { const popup = button.closest('.popup'); button.addEventListener('click', () => closePopup(popup));});
+closeButtons.forEach((button) => {
+  const popup = button.closest(".popup");
+  button.addEventListener("click", () => closePopup(popup));
+});
