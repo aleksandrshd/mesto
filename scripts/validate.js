@@ -18,19 +18,19 @@ function handleFormSubmit(event) {
   } else {
     alert('Форма невалидна');
   }
-};
+}
 
 function handleFormInput(event, config) {
   const input = event.target;
   const form = event.currentTarget;
   showFieldError(input);
   setSubmitButtonState(form, config);
-};
+}
 
 function showFieldError(input) {
   const span = input.nextElementSibling;
   span.textContent = input.validationMessage;
-};
+}
 
 function setSubmitButtonState(form, config) {
   const button = form.querySelector(config.button);
@@ -42,7 +42,7 @@ function setSubmitButtonState(form, config) {
     button.setAttribute('disabled', true);
     button.classList.add('popup__save-button_type_disabled');
   }
-};
+}
 
 
 enableValidation(formTitleLink);
