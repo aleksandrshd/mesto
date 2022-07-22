@@ -74,6 +74,10 @@
 
 @import url(../blocks/popup/__input/popup__input.css);
 
+@import url(../blocks/popup/__input/_type/popup__input_type_invalid.css);
+
+@import url(../blocks/popup/__error/popup__error.css);
+
 @import url(../blocks/popup/__save-button/popup__save-button.css);
 
 @import url(../blocks/popup/__save-button/_type/popup__save-button_type_disabled.css);

@@ -16,6 +16,7 @@ const imagePopup = document.querySelector(".popup-image");
 const imagePicture = document.querySelector(".popup__img");
 const imageCaption = document.querySelector(".popup__caption");
 const closeButtons = document.querySelectorAll(".popup__close-button");
+const overlay = document.querySelectorAll(".popup");
 
 const initialCards = [
   {
@@ -75,10 +76,24 @@ function createCard(item) {
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", (event) => {closePopupEsc(event, popup);});
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", (event) => {closePopupEsc(event, popup);});
+}
+
+function closePopupOnClick(event, popup) {
+  if (event.target === popup) {
+    closePopup(popup);
+  }
+}
+
+function closePopupEsc(event, popup) {
+  if (event.key === 'Escape') {
+    closePopup(popup);
+  }
 }
 
 function handleProfileFormSubmit(evt) {
@@ -133,4 +148,8 @@ cardForm.addEventListener("submit", handleCardFormSubmit);
 closeButtons.forEach((button) => {
   const popup = button.closest(".popup");
   button.addEventListener("click", () => {closePopup(popup);});
+  popup.addEventListener("click", (event) => {closePopupOnClick(event, popup);});
+  //document.addEventListener("keydown", (event) => {closePopupEsc(event, popup);});
 });
+
+

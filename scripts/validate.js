@@ -1,6 +1,15 @@
 const formTitleLink = {
   form: '.popup__form[name="input_type_titleLink"]',
-  button: '.popup__save-button'
+  button: '.popup__save-button',
+  buttonDisabled: 'popup__save-button_type_disabled',
+  borderInvalid: 'popup__input_type_invalid'
+};
+
+const formNameJob ={
+  form: '.popup__form[name="input_type_nameJob"]',
+  button: '.popup__save-button',
+  buttonDisabled: 'popup__save-button_type_disabled',
+  borderInvalid: 'popup__input_type_invalid'
 };
 
 function enableValidation(config) {
@@ -15,6 +24,7 @@ function handleFormSubmit(event) {
   const isValid = form.checkValidity();
   if (isValid) {
     alert('Форма валидна');
+    //form.reset();
   } else {
     alert('Форма невалидна');
   }
@@ -25,6 +35,7 @@ function handleFormInput(event, config) {
   const form = event.currentTarget;
   showFieldError(input);
   setSubmitButtonState(form, config);
+  setInputState(input, config);
 }
 
 function showFieldError(input) {
@@ -37,12 +48,23 @@ function setSubmitButtonState(form, config) {
   const isValid = form.checkValidity();
   if (isValid) {
     button.removeAttribute('disabled');
-    button.classList.remove('popup__save-button_type_disabled');
+    button.classList.remove(config.buttonDisabled);
   } else {
     button.setAttribute('disabled', true);
-    button.classList.add('popup__save-button_type_disabled');
+    button.classList.add(config.buttonDisabled);
+  }
+}
+
+function setInputState(input, config) {
+  const isValid = input.checkValidity();
+  if (isValid) {
+    input.classList.remove(config.borderInvalid);
+  } else {
+    input.classList.add(config.borderInvalid);
   }
 }
 
 
 enableValidation(formTitleLink);
+
+enableValidation(formNameJob);
