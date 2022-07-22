@@ -14,20 +14,8 @@ const formNameJob ={
 
 function enableValidation(config) {
   const form = document.querySelector(config.form);
-  form.addEventListener("submit", handleFormSubmit);
   form.addEventListener("input", (event) => handleFormInput(event, config));
 
-}
-
-function handleFormSubmit(event) {
-  const form = event.currentTarget;
-  const isValid = form.checkValidity();
-  if (isValid) {
-    alert('Форма валидна');
-    //form.reset();
-  } else {
-    alert('Форма невалидна');
-  }
 }
 
 function handleFormInput(event, config) {
