@@ -14,7 +14,7 @@ const formNameJob ={
 
 function enableValidation(config) {
   const form = document.querySelector(config.form);
-  form.addEventListener("input", (event) => handleFormInput(event, config));
+  form.addEventListener('input', (event) => handleFormInput(event, config));
 
 }
 
