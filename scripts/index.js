@@ -40,7 +40,7 @@ const initialCards = [
   },
   {
     name: 'Эльбрус',
-    link: 'http://s4.fotokto.ru/photo/full/184/1846566.jpg',
+    link: 'https://aztours.ru/wp-content/uploads/2022/03/polyana-Azau.jpg',
   },
   {
     name: 'Нерехта',
@@ -52,7 +52,7 @@ const initialCards = [
   },
   {
     name: 'Александров',
-    link: 'http://ggss.narod.ru/foto/Aleksandrov/slides/62.jpg',
+    link: 'http://photobook33.ru/wp-content/uploads/2017/02/%D0%A5%D1%80%D0%B0%D0%BC-%D0%A1%D0%B5%D1%80%D0%B0%D1%84%D0%B8%D0%BC%D0%B0-%D0%A1%D0%B0%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%BE%D0%B2.jpg',
   },
 ];
 
