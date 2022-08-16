@@ -1,3 +1,6 @@
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
+
 const editButton = document.querySelector('.profile__edit-button');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
@@ -10,68 +13,48 @@ const cardForm = cardPopup.querySelector('.popup__container-card');
 const titleInput = cardForm.querySelector('.popup__input_type_title');
 const linkInput = cardForm.querySelector('.popup__input_type_link');
 const elementsList = document.querySelector('.elements__list');
-const elementTemplate = document.querySelector('.element-template').content;
 const addButton = document.querySelector('.profile__add-button');
-const imagePopup = document.querySelector('.popup-image');
-const imagePicture = document.querySelector('.popup__img');
-const imageCaption = document.querySelector('.popup__caption');
 const closeButtons = document.querySelectorAll('.popup__close-button');
-
+const template = document.querySelector('.element-template').content;
+const formTitleLink = '.popup__form[name="input_type_titleLink"]';
+const configTitleLink = {
+  button: '.popup__save-button',
+  buttonDisabled: 'popup__save-button_type_disabled',
+  borderInvalid: 'popup__input_type_invalid'
+};
+const formNameJob = '.popup__form[name="input_type_nameJob"]';
+const configNameJob ={
+  form: '.popup__form[name="input_type_nameJob"]',
+  button: '.popup__save-button',
+  buttonDisabled: 'popup__save-button_type_disabled',
+  borderInvalid: 'popup__input_type_invalid'
+};
 const initialCards = [
   {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+    name: 'Кисловодск',
+    link: 'https://horosho-tam.ru/thumb/top/pics/33/68/60b0dbeddbb69e3779626833/kislovodsk.jpg',
   },
   {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
+    name: 'Калиниград',
+    link: 'https://y-k.ru/services/ekskursii-kaliningrad-i-oblast/obzornaya-po-kaliningradu/kaliningrad.jpg',
   },
   {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+    name: 'Эльбрус',
+    link: 'http://s4.fotokto.ru/photo/full/184/1846566.jpg',
   },
   {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
+    name: 'Нерехта',
+    link: 'https://i.ytimg.com/vi/-5QbfqMIBIk/maxresdefault.jpg',
   },
   {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
+    name: 'Сегриев Посад',
+    link: 'https://traveltimes.ru/wp-content/uploads/2021/06/hHl0URlnmZkIG1KfgUAx.jpg',
   },
   {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
+    name: 'Александров',
+    link: 'http://ggss.narod.ru/foto/Aleksandrov/slides/62.jpg',
   },
 ];
-
-function createCard(item) {
-  const element = elementTemplate.cloneNode(true);
-  const imageElement = element.querySelector('.elements__image');
-  const likeButton = element.querySelector('.elements__like-button');
-  const titleElement = element.querySelector('.elements__title');
-  const deleteButton = element.querySelector('.elements__delete-button');
-
-  imageElement.src = item.link;
-  imageElement.alt = item.name;
-  titleElement.textContent = item.name;
-
-  likeButton.addEventListener('click', (event) => {
-    event.target.classList.toggle('elements__like-button_type_active');
-  });
-
-  deleteButton.addEventListener('click', (event) => {
-    event.target.closest('.elements__card').remove();
-  });
-
-  imageElement.onclick = function () {
-    openPopup(imagePopup);
-    imagePicture.src = item.link;
-    imagePicture.alt = item.name;
-    imageCaption.textContent = item.name;
-  };
-
-  return element;
-}
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -143,8 +126,9 @@ function handleCardFormSubmit(event) {
   ];
 
   newCards.forEach((item) => {
-    const card = createCard(item);
-    elementsList.prepend(card);
+    const card = new Card(item, template);
+    const cardElement = card.render();
+    elementsList.prepend(cardElement);
   });
 
   event.target.reset();
@@ -155,8 +139,9 @@ function handleCardFormSubmit(event) {
 }
 
 initialCards.forEach((item) => {
-  const card = createCard(item);
-  elementsList.append(card);
+  const card = new Card(item, template);
+  const cardElement = card.render();
+  elementsList.prepend(cardElement);
 });
 
 editButton.addEventListener('click', () => {
@@ -184,5 +169,13 @@ closeButtons.forEach((button) => {
   button.addEventListener('click', () => {closePopup(popup);});
   popup.addEventListener('click', (event) => {closePopupOnClick(event, popup);});
 });
+
+const ValTitleLink = new FormValidator(configTitleLink, formTitleLink);
+ValTitleLink.enableValidation();
+
+const ValNameJob = new FormValidator(configNameJob, formNameJob);
+ValNameJob.enableValidation();
+
+export {openPopup};
 
 
