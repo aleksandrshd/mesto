@@ -39,8 +39,8 @@ const initialCards = [
     link: 'https://y-k.ru/services/ekskursii-kaliningrad-i-oblast/obzornaya-po-kaliningradu/kaliningrad.jpg',
   },
   {
-    name: 'Эльбрус',
-    link: 'https://aztours.ru/wp-content/uploads/2022/03/polyana-Azau.jpg',
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
   },
   {
     name: 'Нерехта',
@@ -51,8 +51,8 @@ const initialCards = [
     link: 'https://traveltimes.ru/wp-content/uploads/2021/06/hHl0URlnmZkIG1KfgUAx.jpg',
   },
   {
-    name: 'Александров',
-    link: 'http://photobook33.ru/wp-content/uploads/2017/02/%D0%A5%D1%80%D0%B0%D0%BC-%D0%A1%D0%B5%D1%80%D0%B0%D1%84%D0%B8%D0%BC%D0%B0-%D0%A1%D0%B0%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE-%D0%90%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%BE%D0%B2.jpg',
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
   },
 ];
 
