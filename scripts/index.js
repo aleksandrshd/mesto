@@ -16,15 +16,10 @@ const elementsList = document.querySelector('.elements__list');
 const addButton = document.querySelector('.profile__add-button');
 const closeButtons = document.querySelectorAll('.popup__close-button');
 const template = document.querySelector('.element-template').content;
-const formTitleLink = '.popup__form[name="input_type_titleLink"]';
-const configTitleLink = {
-  button: '.popup__save-button',
-  buttonDisabled: 'popup__save-button_type_disabled',
-  borderInvalid: 'popup__input_type_invalid'
-};
-const formNameJob = '.popup__form[name="input_type_nameJob"]';
-const configNameJob ={
-  form: '.popup__form[name="input_type_nameJob"]',
+const imagePopup = document.querySelector('.popup-image');
+const imagePicture = document.querySelector('.popup__img');
+const imageCaption = document.querySelector('.popup__caption');
+const config = {
   button: '.popup__save-button',
   buttonDisabled: 'popup__save-button_type_disabled',
   borderInvalid: 'popup__input_type_invalid'
@@ -84,26 +79,17 @@ function setNameJobValue() {
   jobInput.value = profileJob.textContent;
 }
 
-function disableSaveButton (popup) {
-  const button = popup.querySelector('.popup__save-button');
-  button.setAttribute('disabled', true);
-  button.classList.add('popup__save-button_type_disabled');
+function createCard(item, template, handleCardClick) {
+  const card = new Card(item, template, handleCardClick);
+  const cardElement = card.render();
+  return cardElement;
 }
 
-function enableSaveButton (popup) {
-  const button = popup.querySelector('.popup__save-button');
-  button.removeAttribute('disabled');
-  button.classList.remove('popup__save-button_type_disabled');
-}
-
-function spansErrorsReset (popup) {
-  const spans = Array.from(popup.querySelectorAll('.popup__error'));
-  spans.forEach((span) => span.textContent = '');
-}
-
-function inputsInvalidReset (popup) {
-  const inputs = Array.from(popup.querySelectorAll('.popup__input'));
-  inputs.forEach((input) => input.classList.remove('popup__input_type_invalid'));
+function handleCardClick(name, link) {
+    openPopup(imagePopup);
+    imagePicture.src = link;
+    imagePicture.alt = name;
+    imageCaption.textContent = name;
 }
 
 function handleProfileFormSubmit(event) {
@@ -118,29 +104,23 @@ function handleProfileFormSubmit(event) {
 function handleCardFormSubmit(event) {
   event.preventDefault();
 
-  const newCards = [
-    {
+  const newCard = {
       name: titleInput.value,
       link: linkInput.value,
-    },
-  ];
+    };
 
-  newCards.forEach((item) => {
-    const card = new Card(item, template);
-    const cardElement = card.render();
-    elementsList.prepend(cardElement);
-  });
+  const cardElement = createCard(newCard, template, handleCardClick);
+  elementsList.prepend(cardElement);
 
   event.target.reset();
 
-  disableSaveButton(event.target);
+  formValidators['input_type_titleLink'].disableSaveButton();
 
   closePopup(cardPopup);
 }
 
 initialCards.forEach((item) => {
-  const card = new Card(item, template);
-  const cardElement = card.render();
+  const cardElement = createCard(item, template, handleCardClick);
   elementsList.prepend(cardElement);
 });
 
@@ -149,11 +129,10 @@ editButton.addEventListener('click', () => {
 
   setNameJobValue();
 
-  enableSaveButton(profilePopup);
+  formValidators['input_type_nameJob'].enableSaveButton();
+  formValidators['input_type_nameJob'].spansErrorsReset();
+  formValidators['input_type_nameJob'].inputsInvalidReset();
 
-  spansErrorsReset(profilePopup);
-
-  inputsInvalidReset(profilePopup);
 });
 
 addButton.addEventListener('click', () => {
@@ -170,12 +149,16 @@ closeButtons.forEach((button) => {
   popup.addEventListener('click', (event) => {closePopupOnClick(event, popup);});
 });
 
-const ValTitleLink = new FormValidator(configTitleLink, formTitleLink);
-ValTitleLink.enableValidation();
+const formValidators = {};
 
-const ValNameJob = new FormValidator(configNameJob, formNameJob);
-ValNameJob.enableValidation();
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll('.popup__form'));
+  formList.forEach((formElement) => {
+    const formName = formElement.getAttribute('name');
+    const validator = new FormValidator(config, `.popup__form[name="${formName}"]`);
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
 
-export {openPopup};
-
-
+enableValidation (config);
