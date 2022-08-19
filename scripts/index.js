@@ -22,7 +22,9 @@ const imageCaption = document.querySelector('.popup__caption');
 const config = {
   button: '.popup__save-button',
   buttonDisabled: 'popup__save-button_type_disabled',
-  borderInvalid: 'popup__input_type_invalid'
+  error: '.popup__error',
+  input: '.popup__input',
+  inputInvalid: 'popup__input_type_invalid'
 };
 const initialCards = [
   {
@@ -114,7 +116,7 @@ function handleCardFormSubmit(event) {
 
   event.target.reset();
 
-  formValidators['input_type_titleLink'].disableSaveButton();
+  formValidators['input_type_titleLink'].setSubmitButtonState();
 
   closePopup(cardPopup);
 }
@@ -129,9 +131,8 @@ editButton.addEventListener('click', () => {
 
   setNameJobValue();
 
-  formValidators['input_type_nameJob'].enableSaveButton();
-  formValidators['input_type_nameJob'].spansErrorsReset();
-  formValidators['input_type_nameJob'].inputsInvalidReset();
+  formValidators['input_type_nameJob'].setSubmitButtonState();
+  formValidators['input_type_nameJob'].hideErrors();
 
 });
 

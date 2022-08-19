@@ -3,9 +3,8 @@ class FormValidator {
     this._form = document.querySelector(form);
     this._config = config;
     this._button = this._form.querySelector(this._config.button);
-    this._saveButton = this._form.querySelector('.popup__save-button');
-    this._spans = Array.from(this._form.querySelectorAll('.popup__error'));
-    this._inputs = Array.from(this._form.querySelectorAll('.popup__input'));
+    this._spans = Array.from(this._form.querySelectorAll(this._config.error));
+    this._inputs = Array.from(this._form.querySelectorAll(this._config.input));
   }
 
   enableValidation() {
@@ -15,7 +14,7 @@ class FormValidator {
   _handleFormInput(event) {
     const input = event.target;
     this._showFieldError(input);
-    this._setSubmitButtonState();
+    this.setSubmitButtonState();
     this._setInputState(input);
   }
 
@@ -24,7 +23,7 @@ class FormValidator {
     span.textContent = input.validationMessage;
   }
 
-  _setSubmitButtonState() {
+  setSubmitButtonState() {
     const isValid = this._form.checkValidity();
     if (isValid) {
       this._button.removeAttribute('disabled');
@@ -38,28 +37,15 @@ class FormValidator {
   _setInputState(input) {
     const isValid = input.checkValidity();
     if (isValid) {
-      input.classList.remove(this._config.borderInvalid);
+      input.classList.remove(this._config.inputInvalid);
     } else {
-      input.classList.add(this._config.borderInvalid);
+      input.classList.add(this._config.inputInvalid);
     }
   }
 
-  disableSaveButton () {
-    this._saveButton.setAttribute('disabled', true);
-    this._saveButton.classList.add('popup__save-button_type_disabled');
-  }
-
-  enableSaveButton () {
-    this._saveButton.removeAttribute('disabled');
-    this._saveButton.classList.remove('popup__save-button_type_disabled');
-  }
-
-  spansErrorsReset () {
+  hideErrors () {
     this._spans.forEach((span) => span.textContent = '');
-  }
-
-  inputsInvalidReset () {
-    this._inputs.forEach((input) => input.classList.remove('popup__input_type_invalid'));
+    this._inputs.forEach((input) => input.classList.remove(this._config.inputInvalid));
   }
 }
 
