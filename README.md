@@ -6,7 +6,7 @@
 
 Место - это интерактивная страница, на которой пользователи могут редактировать информацию профиля, добавлять фотографии, удалять их и ставить лайки.
 
-Данный учебный проект создан в рамках прохождения 4 - 7 спринтов курса Веб-разработчик.
+Данный учебный проект создан в рамках прохождения 4 - 8 спринтов курса Веб-разработчик.
 
 ## Функционал:
 
@@ -43,6 +43,7 @@
 - [Чеклист 5](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-5.pdf);
 - [Чеклист 6](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-6.pdf);
 - [Чеклист 7](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-7.pdf);
+- [Чеклист 8](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-8.pdf);
 
 ## Ссылка на сайт:
 
