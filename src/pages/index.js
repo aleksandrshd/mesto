@@ -83,12 +83,6 @@ const cardPopupEl = new PopupWithForm('.popup-card',
 
       event.preventDefault();
 
-      const newCard = {
-        name: info.title,
-        link: info.link
-      };
-
-      /*cards.addItem(createCard(newCard));*/
       api.setNewCard(info.title, info.link)
         .then((data =>
           cards.addItem(createCard({name: data.name, link: data.link, likes: data.likes}))));
