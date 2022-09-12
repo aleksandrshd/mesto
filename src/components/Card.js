@@ -3,11 +3,13 @@ export default class Card {
   constructor(item, template, handleCardClick) {
     this._link = item.link;
     this._name = item.name;
+    this._likes = item.likes;
 
     this._template = template;
 
     this._element = this._template.cloneNode(true);
     this._likeButton = this._element.querySelector('.elements__like-button');
+    this._likeCounter = this._element.querySelector('.elements__like-counter');
     this._deleteButton = this._element.querySelector('.elements__delete-button');
     this._imageElement = this._element.querySelector('.elements__image');
     this._titleElement = this._element.querySelector('.elements__title');
@@ -22,7 +24,8 @@ export default class Card {
   }
 
   _deleteCard() {
-    this._deleteButton.addEventListener('click', (event) => event.target.closest('.elements__card').remove());
+    /*this._deleteButton.addEventListener('click', (event) => event.target.closest('.elements__card').remove());*/
+    this._deleteButton.addEventListener('click', () => {document.querySelector('.popup-delete-card').classList.add('popup_opened')});
   }
 
   _openCardImage() {
@@ -41,6 +44,7 @@ export default class Card {
     this._imageElement.src = this._link;
     this._imageElement.alt = this._name;
     this._titleElement.textContent = this._name;
+    this._likeCounter.textContent = this._likes.length;
     this._setEventListeners();
     return this._element;
   }
