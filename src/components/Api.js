@@ -38,4 +38,19 @@ export default class Api {
     })
       .then(res => res.json());
   }
+
+  deleteCard(cardId) {
+    return fetch(`${this._adress}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers})
+      .then(res => res.json());
+
+  }
+
+  /*deleteCard(cardId) {
+    return fetch(`${this._adress}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers})
+      .then(res => res.json());
+  }*/
 }

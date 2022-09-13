@@ -14,14 +14,29 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Api from '../components/Api.js';
-import Popup from "../components/Popup";
+import PopupWithSubmit from '../components/PopupWithSubmit.js';
+
+let userId = null;
 
 function handleCardClick(name, link) {
   imgPopup.open(name, link);
 }
 
 function createCard(item) {
-  const card = new Card(item, template, handleCardClick);
+  const card = new Card(item, template, handleCardClick,
+    {handleDeleteIconClick: () => {deletePopup.open();
+    formValidators['input_type_delete-card'].setSubmitButtonState();
+    deletePopup.setSubmitAction((event) => {
+      event.preventDefault();
+      console.log(card.id());
+      api.deleteCard(card.id())
+        .then(() => {
+          console.log(`Card ${card.id()} removed`);
+          card.removeCard();
+          deletePopup.close();
+        })
+    })}},
+    userId);
   const cardElement = card.render();
 
   return cardElement;
@@ -51,16 +66,15 @@ const cards = new Section({
   },
   '.elements__list');
 
-cardsInit.then ((data) => {
-  cards.renderItems(data.map((item) => ({name: item.name, link: item.link, likes: item.likes})));
+cardsInit.then((data) => {
+  cards.renderItems(data.map((item) => ({name: item.name, link: item.link, likes: item.likes, ownerID: item.owner._id, id: item._id})));
 })
 
 const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar');
 
-const userInfoServer = api.getUserInfo();
-console.log(userInfoServer);
-userInfoServer.then ((data) => {
-  userInfo.setUserInfo(data.name, data.about, data.avatar)
+api.getUserInfo().then((data) => {
+  userInfo.setUserInfo(data.name, data.about, data.avatar);
+  userId = data._id;
 });
 
 const profilePopupEl = new PopupWithForm('.popup-profile',
@@ -92,7 +106,8 @@ const cardPopupEl = new PopupWithForm('.popup-card',
   });
 cardPopupEl.setEventListeners();
 
-const deletePopup = new Popup('.popup-delete-card');
+const deletePopup = new PopupWithSubmit('.popup-delete-card');
+deletePopup.setEventListeners();
 
 const enableValidation = (config) => {
 
