@@ -1,6 +1,6 @@
 export default class Card {
 
-  constructor(item, template, handleCardClick, {handleDeleteIconClick}, userId) {
+  constructor(item, template, handleCardClick, {handleDeleteIconClick}, handleLikeClick, userId) {
     this._link = item.link;
     this._name = item.name;
     this._likes = item.likes;
@@ -10,6 +10,7 @@ export default class Card {
     this._template = template;
 
     this._element = this._template.cloneNode(true);
+    this._cardElement = this._element.querySelector('.elements__card');
     this._likeButton = this._element.querySelector('.elements__like-button');
     this._likeCounter = this._element.querySelector('.elements__like-counter');
     this._deleteButton = this._element.querySelector('.elements__delete-button');
@@ -17,17 +18,18 @@ export default class Card {
     this._titleElement = this._element.querySelector('.elements__title');
 
     this._handleCardClick = handleCardClick;
+    this._handleLikeClick = handleLikeClick;
     this._handleDeleteIconClick = handleDeleteIconClick;
   }
 
   _likeCard() {
     this._likeButton.addEventListener('click', (event) => {
       event.target.classList.toggle('elements__like-button_type_active');
+      this._handleLikeClick();
     });
   }
 
   _deleteCard() {
-    /*this._deleteButton.addEventListener('click', (event) => event.target.closest('.elements__card').remove());*/
     this._deleteButton.addEventListener('click', () => {this._handleDeleteIconClick()});
   }
 
@@ -52,11 +54,11 @@ export default class Card {
   }
 
   removeCard() {
-    this._element.remove();
+    this._cardElement.remove();
   }
 
-  setLikesInfo() {
-    this._likeCounter.textContent = '10';
+  setLikesInfo(likes) {
+    this._likeCounter.textContent = likes.length;
   }
 
   render() {

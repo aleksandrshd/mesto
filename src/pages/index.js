@@ -24,18 +24,27 @@ function handleCardClick(name, link) {
 
 function createCard(item) {
   const card = new Card(item, template, handleCardClick,
-    {handleDeleteIconClick: () => {deletePopup.open();
-    formValidators['input_type_delete-card'].setSubmitButtonState();
-    deletePopup.setSubmitAction((event) => {
-      event.preventDefault();
-      console.log(card.id());
-      api.deleteCard(card.id())
-        .then(() => {
-          console.log(`Card ${card.id()} removed`);
-          card.removeCard();
-          deletePopup.close();
+    {
+      handleDeleteIconClick: () => {
+        deletePopup.open();
+        formValidators['input_type_delete-card'].setSubmitButtonState();
+        deletePopup.setSubmitAction((event) => {
+          event.preventDefault();
+          api.deleteCard(card.id())
+            .then(() => {
+              card.removeCard();
+              deletePopup.close();
+            })
         })
-    })}},
+      }
+    },
+    () => {
+    api.changeLikeCardStatus(card.id(), false)
+      .then((data) => {
+        console.log(data);
+        card.setLikesInfo(data.likes);
+      });
+    },
     userId);
   const cardElement = card.render();
 
@@ -67,7 +76,13 @@ const cards = new Section({
   '.elements__list');
 
 cardsInit.then((data) => {
-  cards.renderItems(data.map((item) => ({name: item.name, link: item.link, likes: item.likes, ownerID: item.owner._id, id: item._id})));
+  cards.renderItems(data.map((item) => ({
+    name: item.name,
+    link: item.link,
+    likes: item.likes,
+    ownerID: item.owner._id,
+    id: item._id
+  })));
 })
 
 const userInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar');

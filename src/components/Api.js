@@ -47,10 +47,20 @@ export default class Api {
 
   }
 
-  /*deleteCard(cardId) {
-    return fetch(`${this._adress}/cards/${cardId}`, {
-      method: 'DELETE',
-      headers: this._headers})
-      .then(res => res.json());
-  }*/
+  changeLikeCardStatus(cardId, isLiked) {
+    if (!isLiked) {
+      return fetch(`${this._adress}/cards/${cardId}/likes`, {
+        method: 'PUT',
+        headers: this._headers
+      })
+        .then(res => res.json());
+    }
+    else {
+      return fetch(`${this._adress}/cards/${cardId}likes`, {
+        method: 'DELETE',
+        headers: this._headers
+      })
+        .then(res => res.json());
+    }
+  }
 }
