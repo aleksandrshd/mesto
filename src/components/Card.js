@@ -29,8 +29,18 @@ export default class Card {
     });
   }
 
+  _setLikeStatus() {
+    if (this.isLiked()) {
+      this._likeButton.classList.add('elements__like-button_type_active');
+    } else {
+      this._likeButton.classList.remove('elements__like-button_type_active');
+    }
+  }
+
   _deleteCard() {
-    this._deleteButton.addEventListener('click', () => {this._handleDeleteIconClick()});
+    this._deleteButton.addEventListener('click', () => {
+      this._handleDeleteIconClick()
+    });
   }
 
   _openCardImage() {
@@ -57,8 +67,14 @@ export default class Card {
     this._cardElement.remove();
   }
 
+  isLiked() {
+    return Boolean(this._likes.find(item => item._id === this._userID));
+  }
+
   setLikesInfo(likes) {
     this._likeCounter.textContent = likes.length;
+    this._likes = likes;
+    this._setLikeStatus();
   }
 
   render() {
@@ -66,6 +82,7 @@ export default class Card {
     this._imageElement.alt = this._name;
     this._titleElement.textContent = this._name;
     this._likeCounter.textContent = this._likes.length;
+    this._setLikeStatus();
     this._setEventListeners();
     this._setDeleteButtonView();
     return this._element;

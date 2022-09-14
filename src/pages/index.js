@@ -39,13 +39,13 @@ function createCard(item) {
       }
     },
     () => {
-    api.changeLikeCardStatus(card.id(), false)
+    api.changeLikeCardStatus(card.id(), card.isLiked())
       .then((data) => {
-        console.log(data);
         card.setLikesInfo(data.likes);
       });
     },
     userId);
+
   const cardElement = card.render();
 
   return cardElement;

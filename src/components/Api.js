@@ -56,7 +56,7 @@ export default class Api {
         .then(res => res.json());
     }
     else {
-      return fetch(`${this._adress}/cards/${cardId}likes`, {
+      return fetch(`${this._adress}/cards/${cardId}/likes`, {
         method: 'DELETE',
         headers: this._headers
       })
