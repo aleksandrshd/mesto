@@ -17,7 +17,7 @@ export default class Api {
   }
 
   setUserInfo(userName, userJob) {
-    fetch(`${this._adress}/users/me`, {
+    return fetch(`${this._adress}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -65,7 +65,7 @@ export default class Api {
   }
 
   setUserAvatar(avatarLink) {
-    fetch(`${this._adress}/users/me/avatar`, {
+    return fetch(`${this._adress}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({

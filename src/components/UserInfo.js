@@ -8,7 +8,7 @@ export default class UserInfo {
     this._profileAvatar = document.querySelector(this._avatarSelector);
   }
 
-  getUserInfo () {
+  getUserInfo() {
     this._userInfo = {
       name: this._profileName.textContent,
       job: this._profileJob.textContent
@@ -16,13 +16,17 @@ export default class UserInfo {
     return this._userInfo;
   }
 
-  setUserInfo (name, job, avatar) {
+  setUserNameJob(name, job) {
     this._profileName.textContent = name;
     this._profileJob.textContent = job;
-    this._profileAvatar.style.backgroundImage = `url(${avatar})`;
   }
 
-  setUserAvatar (avatar) {
+  setUserInfo(name, job, avatar) {
+    this.setUserNameJob(name, job);
+    this.setUserAvatar(avatar);
+  }
+
+  setUserAvatar(avatar) {
     this._profileAvatar.style.backgroundImage = `url(${avatar})`;
   }
 }

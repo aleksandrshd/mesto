@@ -30,11 +30,14 @@ function createCard(item) {
         formValidators['input_type_delete-card'].setSubmitButtonState();
         deletePopup.setSubmitAction((event) => {
           event.preventDefault();
+          renderLoading(true, deletePopup.getSubmitButton());
           api.deleteCard(card.id())
             .then(() => {
               card.removeCard();
               deletePopup.close();
             })
+            .catch(err => console.log(`Ошибка: ${err}`))
+            .finally(() => renderLoading(false, deletePopup.getSubmitButton()));
         })
       }
     },
@@ -49,6 +52,14 @@ function createCard(item) {
   const cardElement = card.render();
 
   return cardElement;
+}
+
+function renderLoading(isLoading, button) {
+  if (isLoading) {
+    button.textContent = 'Сохранение ...';
+  } else {
+    button.textContent = 'Сохранить';
+  }
 }
 
 const imgPopup = new PopupWithImage('.popup-image');
@@ -95,11 +106,12 @@ api.getUserInfo().then((data) => {
 const profilePopupEl = new PopupWithForm('.popup-profile',
   {
     handleFormSubmit: (info, event) => {
-
       event.preventDefault();
-
-      userInfo.setUserInfo(info.name, info.job);
-      api.setUserInfo(info.name, info.job);
+      renderLoading(false, profilePopupEl.getSubmitButton());
+      userInfo.setUserNameJob(info.name, info.job);
+      api.setUserInfo(info.name, info.job)
+        .catch(err => console.log(`Ошибка: ${err}`))
+        .finally(() => renderLoading(false, profilePopupEl.getSubmitButton()));
 
       profilePopupEl.close();
     }
@@ -112,9 +124,13 @@ const cardPopupEl = new PopupWithForm('.popup-card',
 
       event.preventDefault();
 
+      renderLoading(true, cardPopupEl.getSubmitButton());
+
       api.setNewCard(info.title, info.link)
         .then((data =>
-          cards.addItem(createCard({name: data.name, link: data.link, likes: data.likes}))));
+          cards.addItem(createCard({name: data.name, link: data.link, likes: data.likes}))))
+        .catch(err => console.log(`Ошибка: ${err}`))
+        .finally(() => renderLoading(false, cardPopupEl.getSubmitButton()));
 
       cardPopupEl.close();
     }
@@ -160,11 +176,11 @@ const avatarForm = new PopupWithForm('.popup-avatar',
   {
     handleFormSubmit: (info, event) => {
       event.preventDefault();
-
+      renderLoading(true, avatarForm.getSubmitButton());
       api.setUserAvatar(info.avatar)
-        .then((data) => userInfo.setUserAvatar(data.avatar));
-
-      /*userInfo.setUserAvatar(info.avatar);*/
+        .then((data) => userInfo.setUserAvatar(data.avatar))
+        .catch(err => console.log(`Ошибка: ${err}`))
+        .finally(() => renderLoading(false, avatarForm.getSubmitButton()));
 
       avatarForm.close();
     }

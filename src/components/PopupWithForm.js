@@ -32,4 +32,8 @@ export default class PopupWithForm extends Popup {
     });
     return this._formValues;
   }
+
+  getSubmitButton() {
+    return this._form.querySelector('.popup__save-button');
+  }
 }
