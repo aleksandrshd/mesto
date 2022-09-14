@@ -27,10 +27,14 @@ function createCard(item) {
     {
       handleDeleteIconClick: () => {
         deletePopup.open();
+
         formValidators['input_type_delete-card'].setSubmitButtonState();
+
         deletePopup.setSubmitAction((event) => {
           event.preventDefault();
+
           renderLoading(true, deletePopup.getSubmitButton());
+
           api.deleteCard(card.id())
             .then(() => {
               card.removeCard();
