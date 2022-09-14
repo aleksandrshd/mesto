@@ -21,4 +21,8 @@ export default class UserInfo {
     this._profileJob.textContent = job;
     this._profileAvatar.style.backgroundImage = `url(${avatar})`;
   }
+
+  setUserAvatar (avatar) {
+    this._profileAvatar.style.backgroundImage = `url(${avatar})`;
+  }
 }

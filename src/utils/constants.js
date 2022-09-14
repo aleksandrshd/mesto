@@ -1,5 +1,6 @@
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
+const avatarEditButton = document.querySelector('.profile__avatar');
 const template = document.querySelector('.element-template').content;
 const formValidators = {};
 
@@ -37,4 +38,4 @@ const initialCards = [
   }
 ];
 
-export {editButton, addButton, template, formValidators, config, initialCards};
+export {editButton, addButton,avatarEditButton, template, formValidators, config};

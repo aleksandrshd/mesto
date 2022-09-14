@@ -42,7 +42,8 @@ export default class Api {
   deleteCard(cardId) {
     return fetch(`${this._adress}/cards/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers})
+      headers: this._headers
+    })
       .then(res => res.json());
 
   }
@@ -54,13 +55,23 @@ export default class Api {
         headers: this._headers
       })
         .then(res => res.json());
-    }
-    else {
+    } else {
       return fetch(`${this._adress}/cards/${cardId}/likes`, {
         method: 'DELETE',
         headers: this._headers
       })
         .then(res => res.json());
     }
+  }
+
+  setUserAvatar(avatarLink) {
+    fetch(`${this._adress}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: avatarLink
+      })
+    })
+      .then(res => res.json());
   }
 }

@@ -2,10 +2,10 @@ import './index.css';
 import {
   editButton,
   addButton,
+  avatarEditButton,
   template,
   formValidators,
-  config,
-  initialCards
+  config
 } from '../utils/constants.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -39,10 +39,10 @@ function createCard(item) {
       }
     },
     () => {
-    api.changeLikeCardStatus(card.id(), card.isLiked())
-      .then((data) => {
-        card.setLikesInfo(data.likes);
-      });
+      api.changeLikeCardStatus(card.id(), card.isLiked())
+        .then((data) => {
+          card.setLikesInfo(data.likes);
+        });
     },
     userId);
 
@@ -154,6 +154,25 @@ addButton.addEventListener('click', () => {
   formValidators['input_type_titleLink'].setSubmitButtonState();
 
   cardPopupEl.open();
+});
+
+const avatarForm = new PopupWithForm('.popup-avatar',
+  {
+    handleFormSubmit: (info, event) => {
+      event.preventDefault();
+
+      api.setUserAvatar(info.avatar)
+        .then((data) => userInfo.setUserAvatar(data.avatar));
+
+      /*userInfo.setUserAvatar(info.avatar);*/
+
+      avatarForm.close();
+    }
+  });
+avatarForm.setEventListeners();
+
+avatarEditButton.addEventListener('click', () => {
+  avatarForm.open();
 });
 
 
