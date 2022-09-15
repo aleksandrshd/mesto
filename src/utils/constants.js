@@ -11,31 +11,13 @@ const config = {
   input: '.popup__input',
   inputInvalid: 'popup__input_type_invalid'
 };
-const initialCards = [
-  {
-    name: 'Кисловодск',
-    link: 'https://horosho-tam.ru/thumb/top/pics/33/68/60b0dbeddbb69e3779626833/kislovodsk.jpg'
-  },
-  {
-    name: 'Калиниград',
-    link: 'https://y-k.ru/services/ekskursii-kaliningrad-i-oblast/obzornaya-po-kaliningradu/kaliningrad.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  },
-  {
-    name: 'Нерехта',
-    link: 'https://i.ytimg.com/vi/-5QbfqMIBIk/maxresdefault.jpg'
-  },
-  {
-    name: 'Сегриев Посад',
-    link: 'https://traveltimes.ru/wp-content/uploads/2021/06/hHl0URlnmZkIG1KfgUAx.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  }
-];
 
-export {editButton, addButton,avatarEditButton, template, formValidators, config};
+const options = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-50',
+  headers: {
+    authorization: '130914df-0f97-4df0-980a-19c8be58ffdc',
+    'Content-Type': 'application/json'
+  }
+};
+
+export {editButton, addButton,avatarEditButton, template, formValidators, config, options};
