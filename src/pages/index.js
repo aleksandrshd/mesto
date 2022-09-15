@@ -33,15 +33,19 @@ function createCard(item) {
         deletePopup.setSubmitAction((event) => {
           event.preventDefault();
 
-          renderLoading(true, deletePopup.getSubmitButton());
+          renderLoading(true, deletePopup.getSubmitButton(), 'Да');
 
           api.deleteCard(card.id())
             .then(() => {
               card.removeCard();
-              deletePopup.close();
             })
+
             .catch(err => console.log(`Ошибка: ${err}`))
-            .finally(() => renderLoading(false, deletePopup.getSubmitButton()));
+
+            .finally(() => {
+              renderLoading(false, deletePopup.getSubmitButton(), 'Да');
+              deletePopup.close();
+            });
         })
       }
     },
@@ -58,11 +62,11 @@ function createCard(item) {
   return cardElement;
 }
 
-function renderLoading(isLoading, button) {
+function renderLoading(isLoading, button, buttonText) {
   if (isLoading) {
     button.textContent = 'Сохранение ...';
   } else {
-    button.textContent = 'Сохранить';
+    button.textContent = buttonText;
   }
 }
 
@@ -91,7 +95,8 @@ const cards = new Section({
   '.elements__list');
 
 cardsInit.then((data) => {
-  cards.renderItems(data.map((item) => ({
+  /*data.reverse();*/
+  cards.renderItems(data.reverse().map((item) => ({
     name: item.name,
     link: item.link,
     likes: item.likes,
@@ -110,14 +115,20 @@ api.getUserInfo().then((data) => {
 const profilePopupEl = new PopupWithForm('.popup-profile',
   {
     handleFormSubmit: (info, event) => {
-      event.preventDefault();
-      renderLoading(false, profilePopupEl.getSubmitButton());
-      userInfo.setUserNameJob(info.name, info.job);
-      api.setUserInfo(info.name, info.job)
-        .catch(err => console.log(`Ошибка: ${err}`))
-        .finally(() => renderLoading(false, profilePopupEl.getSubmitButton()));
 
-      profilePopupEl.close();
+      event.preventDefault();
+
+      renderLoading(true, profilePopupEl.getSubmitButton(), 'Сохранить');
+
+      api.setUserInfo(info.name, info.job)
+        .then((data) => userInfo.setUserNameJob(data.name, data.about))
+
+        .catch(err => console.log(`Ошибка: ${err}`))
+
+        .finally(() => {
+          renderLoading(false, profilePopupEl.getSubmitButton(), 'Сохранить');
+          profilePopupEl.close();
+        });
     }
   });
 profilePopupEl.setEventListeners();
@@ -128,20 +139,28 @@ const cardPopupEl = new PopupWithForm('.popup-card',
 
       event.preventDefault();
 
-      renderLoading(true, cardPopupEl.getSubmitButton());
+      renderLoading(true, cardPopupEl.getSubmitButton(), 'Создать');
 
       api.setNewCard(info.title, info.link)
+
         .then((data =>
           cards.addItem(createCard({name: data.name, link: data.link, likes: data.likes}))))
-        .catch(err => console.log(`Ошибка: ${err}`))
-        .finally(() => renderLoading(false, cardPopupEl.getSubmitButton()));
 
-      cardPopupEl.close();
+        .catch(err => console.log(`Ошибка: ${err}`))
+
+        .finally(() => {
+
+          renderLoading(false, cardPopupEl.getSubmitButton(), 'Создать');
+          cardPopupEl.close();
+
+        });
     }
   });
+
 cardPopupEl.setEventListeners();
 
 const deletePopup = new PopupWithSubmit('.popup-delete-card');
+
 deletePopup.setEventListeners();
 
 const enableValidation = (config) => {
@@ -179,20 +198,27 @@ addButton.addEventListener('click', () => {
 const avatarForm = new PopupWithForm('.popup-avatar',
   {
     handleFormSubmit: (info, event) => {
+
       event.preventDefault();
-      renderLoading(true, avatarForm.getSubmitButton());
+
+      renderLoading(true, avatarForm.getSubmitButton(), 'Сохранить');
+
       api.setUserAvatar(info.avatar)
         .then((data) => userInfo.setUserAvatar(data.avatar))
         .catch(err => console.log(`Ошибка: ${err}`))
-        .finally(() => renderLoading(false, avatarForm.getSubmitButton()));
-
-      avatarForm.close();
+        .finally(() => {
+          renderLoading(false, avatarForm.getSubmitButton(), 'Сохранить');
+          avatarForm.close();
+        });
     }
   });
 avatarForm.setEventListeners();
 
 avatarEditButton.addEventListener('click', () => {
+
+  formValidators['input_type_avatar'].setSubmitButtonState();
   avatarForm.open();
+
 });
 
 

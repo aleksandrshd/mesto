@@ -24,7 +24,8 @@ export default class Api {
         name: userName,
         about: userJob
       })
-    });
+    })
+      .then(res => res.json());
   }
 
   setNewCard(cardName, cardLink) {
