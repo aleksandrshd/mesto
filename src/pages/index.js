@@ -2,6 +2,7 @@ import './index.css';
 import {
   editButton, addButton, avatarEditButton, template, formValidators, config, options
 } from '../utils/constants.js';
+import {renderLoading} from '../utils/utils.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
@@ -15,16 +16,6 @@ let userId = null;
 
 function handleCardClick(name, link) {
   imgPopup.open(name, link);
-}
-
-function renderLoading(isLoading, button, buttonText) {
-
-  if (isLoading) {
-    button.textContent = 'Сохранение ...';
-
-  } else {
-    button.textContent = buttonText;
-  }
 }
 
 function createCard(item) {
