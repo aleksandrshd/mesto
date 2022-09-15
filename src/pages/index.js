@@ -144,7 +144,13 @@ const cardPopupEl = new PopupWithForm('.popup-card',
       api.setNewCard(info.title, info.link)
 
         .then((data =>
-          cards.addItem(createCard({name: data.name, link: data.link, likes: data.likes}))))
+          cards.addItem(createCard({
+            name: data.name,
+            link: data.link,
+            likes: data.likes,
+            ownerID: data.owner._id,
+            id: data._id
+          }))))
 
         .catch(err => console.log(`Ошибка: ${err}`))
 
