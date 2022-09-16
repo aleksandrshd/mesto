@@ -17,8 +17,17 @@ export default class UserInfo {
   }
 
   setUserNameJob(name, job) {
-    this._profileName.textContent = name;
-    this._profileJob.textContent = job;
+    if (name) {
+      this._profileName.textContent = name;
+    } else {
+      throw new Error('Имя пользователя не было передано');
+    }
+    if (job) {
+      this._profileJob.textContent = job;
+    } else {
+      throw new Error('Описание пользователя не было передано');
+    }
+
   }
 
   setUserInfo(name, job, avatar) {
@@ -27,6 +36,11 @@ export default class UserInfo {
   }
 
   setUserAvatar(avatar) {
-    this._profileAvatar.style.backgroundImage = `url(${avatar})`;
+    if (avatar) {
+      this._profileAvatar.style.backgroundImage = `url(${avatar})`;
+    } else {
+      throw new Error('Аватар пользователя не был передан');
+    }
+
   }
 }

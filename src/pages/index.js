@@ -22,27 +22,25 @@ function createCard(item) {
   const card = new Card(item, template, handleCardClick, {
     handleDeleteIconClick: () => {
 
-      deletePopup.open();
+      popupConfirmation.open();
 
       formValidators['input_type_delete-card'].setSubmitButtonState();
 
-      deletePopup.setSubmitAction((event) => {
+      popupConfirmation.setSubmitAction((event) => {
         event.preventDefault();
 
-        renderLoading(true, deletePopup.getSubmitButton(), 'Да');
+        renderLoading(true, popupConfirmation.getSubmitButton(), 'Да');
 
         api.deleteCard(card.id())
           .then(() => {
-
             card.removeCard();
-
+            popupConfirmation.close();
           })
 
           .catch(err => console.log(`Ошибка: ${err}`))
 
           .finally(() => {
-            renderLoading(false, deletePopup.getSubmitButton(), 'Да');
-            deletePopup.close();
+            renderLoading(false, popupConfirmation.getSubmitButton(), 'Да');
           });
       })
     }
@@ -72,13 +70,18 @@ const avatarForm = new PopupWithForm('.popup-avatar', {
 
     api.setUserAvatar(info.avatar)
 
-      .then((data) => userInfo.setUserAvatar(data.avatar))
+      .then((data) => {
+        userInfo.setUserAvatar(data.avatar);
+        avatarForm.close();
+      })
 
-      .catch(err => console.log(`Ошибка: ${err}`))
+      .catch(err => {
+        console.log(`${err}`);
+        avatarForm.setServerError(err);
+      })
 
       .finally(() => {
         renderLoading(false, avatarForm.getSubmitButton(), 'Сохранить');
-        avatarForm.close();
       });
   }
 });
@@ -125,45 +128,49 @@ const profilePopupEl = new PopupWithForm('.popup-profile', {
     renderLoading(true, profilePopupEl.getSubmitButton(), 'Сохранить');
 
     api.setUserInfo(info.name, info.job)
-      .then((data) => userInfo.setUserNameJob(data.name, data.about))
+      .then((data) => {
+        userInfo.setUserNameJob(data.name, data.about);
+        profilePopupEl.close();
+      })
 
       .catch(err => console.log(`Ошибка: ${err}`))
 
       .finally(() => {
         renderLoading(false, profilePopupEl.getSubmitButton(), 'Сохранить');
-        profilePopupEl.close();
       });
   }
 });
 
 profilePopupEl.setEventListeners();
 
-const cardPopupEl = new PopupWithForm('.popup-card', {
+const popupAddCard = new PopupWithForm('.popup-card', {
   handleFormSubmit: (info, event) => {
     event.preventDefault();
 
-    renderLoading(true, cardPopupEl.getSubmitButton(), 'Создать');
+    renderLoading(true, popupAddCard.getSubmitButton(), 'Создать');
 
     api.setNewCard(info.title, info.link)
 
-      .then((data => cards.addItem(createCard({
-        name: data.name, link: data.link, likes: data.likes, ownerID: data.owner._id, id: data._id
-      }))))
+      .then(data => {
+        cards.addItem(createCard({
+          name: data.name, link: data.link, likes: data.likes, ownerID: data.owner._id, id: data._id
+        }));
+        popupAddCard.close();
+      })
 
       .catch(err => console.log(`Ошибка: ${err}`))
 
       .finally(() => {
-        renderLoading(false, cardPopupEl.getSubmitButton(), 'Создать');
-        cardPopupEl.close();
+        renderLoading(false, popupAddCard.getSubmitButton(), 'Создать');
       });
   }
 });
 
-cardPopupEl.setEventListeners();
+popupAddCard.setEventListeners();
 
-const deletePopup = new PopupWithConfirmation('.popup-delete-card');
+const popupConfirmation = new PopupWithConfirmation('.popup-delete-card');
 
-deletePopup.setEventListeners();
+popupConfirmation.setEventListeners();
 
 const enableValidation = (config) => {
 
@@ -193,13 +200,16 @@ editButton.addEventListener('click', () => {
 addButton.addEventListener('click', () => {
 
   formValidators['input_type_titleLink'].setSubmitButtonState();
+  formValidators['input_type_titleLink'].hideErrors();
 
-  cardPopupEl.open();
+  popupAddCard.open();
 });
 
 avatarEditButton.addEventListener('click', () => {
 
   formValidators['input_type_avatar'].setSubmitButtonState();
+  formValidators['input_type_avatar'].hideErrors();
+
   avatarForm.open();
 
 });
