@@ -37,9 +37,6 @@ export default class PopupWithForm extends Popup {
     return this._form.querySelector('.popup__save-button');
   }
 
-  setServerError(err) {
-    this._form.querySelector('.popup__error_server').textContent = err;
-  }
 }
 
 
